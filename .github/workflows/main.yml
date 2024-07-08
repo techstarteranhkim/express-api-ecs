@@ -16,7 +16,7 @@ jobs:
       - name: Build and push Docker image
         env:
           REGISTRY: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          REPOSITORY: github-actions-repo
+          REPOSITORY: express-api-ecs
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
