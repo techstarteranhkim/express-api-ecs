@@ -1,17 +1,14 @@
 name: Build and Push Docker Image
 
-on:
-  push:
-    branches:
-      - develop
+on: workflow_dispatch
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Build and push Docker image
         env:
