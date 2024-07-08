@@ -1,0 +1,24 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image
+        env:
+          REGISTRY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          REPOSITORY: github-actions-repo
+          IMAGE_TAG: ${{ env.COMMIT_SHORT_SHA }}
+        run: |
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker login -u $REGISTRY -p ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
