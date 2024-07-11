@@ -23,4 +23,4 @@ jobs:
           node-version: 20
       - run: npm install
       - run: |
-          mysql -h localhost -P 5050 -u root -p${MYSQL_ROOT_PASSWORD} test_db -e "SELECT 1"
+          mysql -h localhost -P 5050 -u root -p ${MYSQL_ROOT_PASSWORD} test_db -e "SELECT 1"
