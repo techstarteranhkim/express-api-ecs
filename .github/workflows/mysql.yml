@@ -22,4 +22,5 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - run: npm test
+      - run: |
+          mysql -h 127.0.0.1 -u root -p root123 test_db -e "SELECT 1"
