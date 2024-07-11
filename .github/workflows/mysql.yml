@@ -12,7 +12,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: root123
           MYSQL_DATABASE: test_db
         options: >-
-          --health-cmd "mysqladmin ping -h 127.0.0.1 --silent"
+          --health-cmd "mysqladmin ping -h mysql --silent"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 3
@@ -23,4 +23,4 @@ jobs:
           node-version: 20
       - run: npm install
       - run: |
-          mysql -h 127.0.0.1 -u root -p root123 test_db -e "SELECT 1"
+          mysql -h mysql -u root -p${MYSQL_ROOT_PASSWORD} test_db -e "SELECT 1"
