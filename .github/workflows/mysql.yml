@@ -11,24 +11,15 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: root123
           MYSQL_DATABASE: test_db
-          MYSQL_USER: test_user
-          MYSQL_PASSWORD: test_password
         options: >-
           --health-cmd "mysqladmin ping -h 127.0.0.1 --silent"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 3
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm install
-      - name: Wait for MySQL
-        run: |
-          timeout 60s bash -c "while ! mysqladmin ping -h\"127.0.0.1\" --silent; do sleep 1; done"
-          echo "MySQL is up and running"
-      - name: Run tests
-        env:
-          DATABASE_URL: mysql://test_user:test_password@127.0.0.1:3306/test_db
-        run: npm test
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm test
