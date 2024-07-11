@@ -9,6 +9,10 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+      - name: linting
+        run: |
+          cmd npm install
+          cmd npm run lint
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
